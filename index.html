@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElevenLabs Subtitle Generator & Translator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Subtitle Generator & Translator</h1>
+            <p class="subtitle">Powered by ElevenLabs Speech-to-Text</p>
+        </header>
+
+        <form id="subtitle-form">
+            <!-- API Key -->
+            <div class="form-group">
+                <label for="api-key">
+                    ElevenLabs API Key <span class="required">*</span>
+                </label>
+                <input
+                    type="password"
+                    id="api-key"
+                    placeholder="Enter your ElevenLabs API key"
+                    required
+                >
+                <span class="hint">Get your key at <a href="https://elevenlabs.io" target="_blank">elevenlabs.io</a></span>
+            </div>
+
+            <!-- File Upload -->
+            <div class="form-group">
+                <label for="file-upload">
+                    Audio / Video File <span class="required">*</span>
+                </label>
+                <div class="file-upload-wrapper" id="file-upload-wrapper">
+                    <input type="file" id="file-upload" accept="audio/*,video/*" required>
+                    <div class="file-upload-label">
+                        <span class="file-icon">&#128193;</span>
+                        <span id="file-name">Click or drag a file here</span>
+                        <span class="file-hint">Supports all major audio and video formats (max 3 GB)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Model -->
+            <div class="form-group">
+                <label for="model-id">
+                    Model <span class="required">*</span>
+                </label>
+                <select id="model-id" required>
+                    <option value="scribe_v1">Scribe v1</option>
+                    <option value="scribe_v1_experimental">Scribe v1 Experimental</option>
+                </select>
+            </div>
+
+            <!-- Language row -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="source-language">
+                        Source Language
+                    </label>
+                    <select id="source-language">
+                        <option value="">Auto-detect</option>
+                    </select>
+                    <span class="hint">Language spoken in the audio</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="target-language">
+                        Target Language <span class="required">*</span>
+                    </label>
+                    <select id="target-language" required>
+                    </select>
+                    <span class="hint">Language for the translated subtitles</span>
+                </div>
+            </div>
+
+            <!-- Options row -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="num-speakers">
+                        Number of Speakers
+                    </label>
+                    <input
+                        type="number"
+                        id="num-speakers"
+                        min="1"
+                        max="32"
+                        placeholder="Auto-detect"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="output-format">
+                        Output Format <span class="required">*</span>
+                    </label>
+                    <select id="output-format" required>
+                        <option value="srt">SRT</option>
+                        <option value="vtt">VTT</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Checkboxes -->
+            <div class="form-group checkbox-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="tag-audio-events">
+                    Tag audio events (laughter, music, etc.)
+                </label>
+            </div>
+
+            <button type="submit" id="submit-btn">
+                <span class="btn-text">Generate Translated Subtitles</span>
+                <span class="btn-loading" hidden>
+                    <span class="spinner"></span>
+                    Processing...
+                </span>
+            </button>
+        </form>
+
+        <!-- Progress -->
+        <div id="progress-section" class="progress-section" hidden>
+            <h3>Progress</h3>
+            <div class="progress-bar-wrapper">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <p id="progress-text" class="progress-text">Starting...</p>
+        </div>
+
+        <!-- Results -->
+        <div id="results-section" class="results-section" hidden>
+            <h3>Results</h3>
+
+            <div class="tabs">
+                <button class="tab active" data-tab="original">Original Transcript</button>
+                <button class="tab" data-tab="translated">Translated Subtitles</button>
+            </div>
+
+            <div class="tab-content" id="tab-original">
+                <pre id="original-output"></pre>
+            </div>
+            <div class="tab-content" id="tab-translated" hidden>
+                <pre id="translated-output"></pre>
+            </div>
+
+            <div class="download-buttons">
+                <button id="download-original" class="btn-secondary">Download Original</button>
+                <button id="download-translated" class="btn-primary">Download Translated</button>
+            </div>
+        </div>
+
+        <!-- Error -->
+        <div id="error-section" class="error-section" hidden>
+            <p id="error-text"></p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

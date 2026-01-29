@@ -1,0 +1,366 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #0f0f13;
+    color: #e0e0e6;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 24px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+header .subtitle {
+    margin-top: 6px;
+    color: #8888a0;
+    font-size: 0.9rem;
+}
+
+/* Form */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #b0b0c0;
+}
+
+.required {
+    color: #e05252;
+}
+
+.hint {
+    font-size: 0.75rem;
+    color: #6a6a80;
+}
+
+.hint a {
+    color: #7b7bf7;
+    text-decoration: none;
+}
+
+.hint a:hover {
+    text-decoration: underline;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"],
+select {
+    background: #1a1a24;
+    border: 1px solid #2a2a3a;
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: #e0e0e6;
+    font-size: 0.9rem;
+    transition: border-color 0.2s;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #5b5bf0;
+}
+
+input::placeholder {
+    color: #4a4a60;
+}
+
+/* File upload */
+.file-upload-wrapper {
+    position: relative;
+    border: 2px dashed #2a2a3a;
+    border-radius: 8px;
+    padding: 28px 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.file-upload-wrapper:hover,
+.file-upload-wrapper.dragover {
+    border-color: #5b5bf0;
+    background: #14141e;
+}
+
+.file-upload-wrapper input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.file-upload-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    pointer-events: none;
+}
+
+.file-icon {
+    font-size: 1.5rem;
+    margin-bottom: 4px;
+}
+
+#file-name {
+    color: #b0b0c0;
+    font-size: 0.9rem;
+}
+
+.file-hint {
+    color: #5a5a70;
+    font-size: 0.75rem;
+}
+
+/* Rows */
+.form-row {
+    display: flex;
+    gap: 16px;
+}
+
+@media (max-width: 540px) {
+    .form-row {
+        flex-direction: column;
+    }
+}
+
+/* Checkbox */
+.checkbox-group {
+    flex-direction: row;
+    align-items: center;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    color: #b0b0c0;
+}
+
+.checkbox-label input[type="checkbox"] {
+    accent-color: #5b5bf0;
+    width: 16px;
+    height: 16px;
+}
+
+/* Buttons */
+button[type="submit"] {
+    background: #5b5bf0;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 24px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 8px;
+}
+
+button[type="submit"]:hover {
+    background: #4a4ae0;
+}
+
+button[type="submit"]:disabled {
+    background: #3a3a50;
+    cursor: not-allowed;
+}
+
+.btn-loading {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Progress */
+.progress-section {
+    margin-top: 32px;
+}
+
+.progress-section h3 {
+    font-size: 1rem;
+    margin-bottom: 12px;
+    color: #fff;
+}
+
+.progress-bar-wrapper {
+    background: #1a1a24;
+    border-radius: 6px;
+    height: 8px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: #5b5bf0;
+    border-radius: 6px;
+    transition: width 0.4s ease;
+}
+
+.progress-text {
+    margin-top: 8px;
+    font-size: 0.8rem;
+    color: #8888a0;
+}
+
+/* Results */
+.results-section {
+    margin-top: 32px;
+}
+
+.results-section h3 {
+    font-size: 1rem;
+    margin-bottom: 12px;
+    color: #fff;
+}
+
+.tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 12px;
+}
+
+.tab {
+    background: #1a1a24;
+    border: 1px solid #2a2a3a;
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    padding: 8px 18px;
+    color: #8888a0;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.tab.active {
+    background: #22222e;
+    color: #e0e0e6;
+    border-color: #3a3a4a;
+}
+
+.tab-content {
+    background: #22222e;
+    border: 1px solid #3a3a4a;
+    border-radius: 0 8px 8px 8px;
+    padding: 16px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.tab-content pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: "SF Mono", "Cascadia Code", "Fira Code", monospace;
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: #c8c8d8;
+}
+
+.download-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.btn-secondary,
+.btn-primary {
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-secondary {
+    background: #2a2a3a;
+    color: #b0b0c0;
+}
+
+.btn-secondary:hover {
+    background: #3a3a4a;
+}
+
+.btn-primary {
+    background: #5b5bf0;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #4a4ae0;
+}
+
+/* Error */
+.error-section {
+    margin-top: 24px;
+    background: #2a1a1a;
+    border: 1px solid #4a2a2a;
+    border-radius: 8px;
+    padding: 14px 18px;
+}
+
+.error-section p {
+    color: #e05252;
+    font-size: 0.85rem;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1a1a24;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #3a3a4a;
+    border-radius: 3px;
+}
