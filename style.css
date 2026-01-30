@@ -75,7 +75,8 @@ form {
 input[type="text"],
 input[type="password"],
 input[type="number"],
-select {
+select,
+textarea {
     background: #1a1a24;
     border: 1px solid #2a2a3a;
     border-radius: 8px;
@@ -86,9 +87,15 @@ select {
 }
 
 input:focus,
-select:focus {
+select:focus,
+textarea:focus {
     outline: none;
     border-color: #5b5bf0;
+}
+
+textarea {
+    resize: vertical;
+    font-family: inherit;
 }
 
 input::placeholder {
@@ -199,9 +206,13 @@ button[type="submit"]:disabled {
 }
 
 .btn-loading {
-    display: inline-flex;
+    display: none;
     align-items: center;
     gap: 8px;
+}
+
+.btn-loading.visible {
+    display: inline-flex;
 }
 
 .spinner {

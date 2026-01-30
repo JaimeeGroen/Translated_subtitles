@@ -147,7 +147,7 @@ function hideError() {
 // ---------------------------------------------------------------------------
 // ElevenLabs Speech-to-Text API call
 // ---------------------------------------------------------------------------
-async function transcribeAudio(apiKey, file, modelId, languageCode, numSpeakers, tagAudioEvents) {
+async function transcribeAudio(apiKey, file, modelId, languageCode, numSpeakers, tagAudioEvents, keyterms) {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("model_id", modelId);
@@ -160,6 +160,9 @@ async function transcribeAudio(apiKey, file, modelId, languageCode, numSpeakers,
     }
     if (tagAudioEvents) {
         formData.append("tag_audio_events", "true");
+    }
+    if (keyterms && keyterms.length > 0) {
+        keyterms.forEach((term) => formData.append("keyterms[]", term));
     }
     // Request word-level timestamps
     formData.append("timestamps_granularity", "word");
@@ -336,6 +339,10 @@ async function handleSubmit(e) {
     const numSpeakers = document.getElementById("num-speakers").value;
     const tagAudioEvents = document.getElementById("tag-audio-events").checked;
     const outputFormat = document.getElementById("output-format").value;
+    const keytermsRaw = document.getElementById("keyterms").value.trim();
+    const keyterms = keytermsRaw
+        ? keytermsRaw.split("\n").map((t) => t.trim()).filter((t) => t.length > 0 && t.length < 50).slice(0, 100)
+        : [];
 
     if (!apiKey || !file || !targetLang) {
         showError("Please fill in all required fields.");
@@ -345,7 +352,7 @@ async function handleSubmit(e) {
     const submitBtn = document.getElementById("submit-btn");
     submitBtn.disabled = true;
     submitBtn.querySelector(".btn-text").hidden = true;
-    submitBtn.querySelector(".btn-loading").hidden = false;
+    submitBtn.querySelector(".btn-loading").classList.add("visible");
     document.getElementById("results-section").hidden = true;
 
     try {
@@ -357,7 +364,8 @@ async function handleSubmit(e) {
             modelId,
             sourceLang,
             numSpeakers || null,
-            tagAudioEvents
+            tagAudioEvents,
+            keyterms
         );
         showProgress(40, "Transcription complete. Building subtitle segments...");
 
@@ -417,7 +425,7 @@ async function handleSubmit(e) {
     } finally {
         submitBtn.disabled = false;
         submitBtn.querySelector(".btn-text").hidden = false;
-        submitBtn.querySelector(".btn-loading").hidden = true;
+        submitBtn.querySelector(".btn-loading").classList.remove("visible");
     }
 }
 
