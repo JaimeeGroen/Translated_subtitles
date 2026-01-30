@@ -110,9 +110,22 @@
                 </label>
             </div>
 
+            <!-- Key Terms -->
+            <div class="form-group">
+                <label for="keyterms">
+                    Key Terms
+                </label>
+                <textarea
+                    id="keyterms"
+                    rows="3"
+                    placeholder="Enter words or phrases to improve recognition, one per line (e.g. product names, proper nouns)"
+                ></textarea>
+                <span class="hint">Up to 100 terms, each under 50 characters. Only supported by Scribe v2.</span>
+            </div>
+
             <button type="submit" id="submit-btn">
                 <span class="btn-text">Generate Translated Subtitles</span>
-                <span class="btn-loading" hidden>
+                <span class="btn-loading">
                     <span class="spinner"></span>
                     Processing...
                 </span>
